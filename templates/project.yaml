@@ -1,0 +1,36 @@
+version: 1
+
+project:
+name: ""
+description: ""
+
+framework:
+backend: ""
+frontend: ""
+
+language:
+backend: ""
+frontend: ""
+
+architecture:
+pattern: ""
+
+database:
+primary: ""
+
+rules:
+
+* ""
+
+memory:
+enabled: true
+
+compression:
+warning: 60000
+compress: 100000
+critical: 150000
+
+agent:
+auto_update_memory: true
+auto_update_progress: true
+auto_update_decisions: true
