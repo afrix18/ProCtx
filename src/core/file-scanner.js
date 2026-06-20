@@ -14,7 +14,8 @@ export function scanProject(root = process.cwd()) {
     "build",
     ".next",
     "vendor",
-    ".ai"
+    ".ai",
+    ".proctx"
   ]
 
   function walk(dir, relativePath = "") {

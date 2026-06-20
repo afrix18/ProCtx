@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
 import { init } from "../src/commands/init.js"
-import { bootstrap } from "../src/commands/bootstrap.js"
-import { detect } from "../src/commands/detect.js"
-import { compress } from "../src/commands/compress.js"
-import { handoff } from "../src/commands/handoff.js"
-import { resume } from "../src/commands/resume.js"
+import { scan } from "../src/commands/scan.js"
 import { prompt } from "../src/commands/prompt.js"
+import { createHeader, createBox, printInfo, printSeparator, printNewLine, PASTEL } from "../src/utils/ui.js"
 
 const command = process.argv[2]
 
@@ -15,24 +12,8 @@ switch (command) {
     init()
     break
 
-  case "bootstrap":
-    bootstrap()
-    break
-
-  case "detect":
-    detect()
-    break
-
-  case "compress":
-    compress()
-    break
-
-  case "handoff":
-    handoff()
-    break
-
-  case "resume":
-    resume()
+  case "scan":
+    scan()
     break
 
   case "prompt":
@@ -40,16 +21,25 @@ switch (command) {
     break
 
   default:
-    console.log(`
-ProCtx - Project Context Management CLI
-
-Commands:
-  proctx init       - Initialize .ai/ folder with templates
-  proctx bootstrap  - Analyze project and create context
-  proctx detect     - Run framework/architecture detection
-  proctx compress   - Compress context into handoff format
-  proctx handoff    - Generate handoff documentation
-  proctx resume     - Resume from handoff context
-  proctx prompt     - Generate AI agent prompt (copy-paste ready)
-`)
+    console.log("")
+    console.log(createHeader())
+    printSeparator()
+    printNewLine()
+    
+    console.log(createBox([
+      "proctx init       Initialize project",
+      "proctx scan       Scan and analyze",
+      "proctx prompt     Generate AI prompt"
+    ], { title: "Commands", width: 50, color: PASTEL.lavender }))
+    printNewLine()
+    
+    console.log(createBox([
+      "proctx init      First time setup",
+      "proctx scan      Analyze project",
+      "proctx prompt    Get prompt for AI"
+    ], { title: "Examples", width: 50, color: PASTEL.mint }))
+    printNewLine()
+    
+    printInfo("More info: https://github.com/afrix18/proctx")
+    printNewLine()
 }

@@ -6,7 +6,7 @@ export function ensureGitignore(rootPath) {
   
   const requiredEntries = [
     ".ai/",
-    ".opencode/"
+    ".proctx/"
   ]
 
   let gitignoreContent = ""
@@ -53,7 +53,7 @@ export function createGitignoreIfMissing(rootPath) {
   if (!fs.existsSync(gitignorePath)) {
     const defaultContent = `# ProCtx - AI Context Management
 .ai/
-.opencode/
+.proctx/
 
 # Dependencies
 node_modules/

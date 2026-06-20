@@ -1,158 +1,327 @@
-# ProCtx
+# ProCtx - AI Project Context Manager
 
-> AI Project Context Manager
+[![npm version](https://img.shields.io/npm/v/proctx)](https://www.npmjs.com/package/proctx)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Scan → Compress → Handoff → Resume
+**Kelola konteks proyek AI untuk semua agen AI coding.**
 
-ProCtx adalah sistem manajemen konteks proyek untuk AI Coding Agent.
+ProCtx secara otomatis memindai proyek Anda, mendeteksi framework dan pola arsitektur, dan menghasilkan file konteks terstruktur yang membantu asisten AI memahami codebase Anda.
 
-Tujuannya adalah menjaga pengetahuan proyek tetap tersimpan tanpa harus membawa seluruh riwayat percakapan.
+## Mengapa ProCtx?
 
----
+Asisten AI coding (Claude, GPT, Cursor, dll.) sering kehilangan konteks ketika:
+- Proyek menjadi besar
+- Butuh banyak sesi
+- Context window overflow
 
-## Kenapa ProCtx?
-
-Sebagian besar AI Coding Agent menyimpan informasi proyek di dalam chat.
-
-Ketika proyek membesar:
-
-50k token
-→ 100k token
-→ 200k token
-→ Context Overflow
-
-Akibatnya:
-
-- AI mulai lupa konteks
-- Harus menjelaskan ulang proyek
-- Biaya token meningkat
-- Respon lebih lambat
-- Hallucination meningkat
-
-ProCtx memisahkan:
-
-Project State
-≠
-Conversation History
-
----
+**ProCtx mengatasi ini dengan:**
+- ✅ Memindai struktur proyek otomatis
+- ✅ Mendeteksi framework (Vue, React, Laravel, Node, dll.)
+- ✅ Mengidentifikasi pola arsitektur (MVC, SOLID, CLI-tool, dll.)
+- ✅ Menghasilkan file konteks terstruktur
+- ✅ Bekerja dengan **semua agen AI** (agent-agnostic)
 
 ## Instalasi
 
-### GitHub
-
 ```bash
-npm install -g github:avarenza/proctx
+npm install -g proctx
 ```
 
-Cek instalasi:
+Atau gunakan tanpa instalasi:
 
 ```bash
-proctx 
+npx proctx --help
 ```
 
----
+## Quick Start
 
-## Memulai
-
-### Inisialisasi
+**3 perintah sederhana:**
 
 ```bash
+# 1. Inisialisasi proyek
 proctx init
-```
 
-Membuat folder:
+# 2. Scan dan analisis
+proctx scan
 
-```txt
-.ai/
-├── project-state.json
-├── architecture.json
-├── decisions.json
-├── progress.json
-├── next-task.json
-└── handoff.json
-```
-
-### Analisis Proyek
-
-```bash
-proctx bootstrap
-```
-
-### Deteksi Framework & Arsitektur
-
-```bash
-proctx detect
-```
-
-### Kompres Konteks
-
-```bash
-proctx compress
-```
-
-### Buat Handoff
-
-```bash
-proctx handoff
-```
-
-### Lanjutkan Sesi
-
-```bash
-proctx resume
-```
-
-### Generate Prompt AI
-
-```bash
+# 3. Dapatkan prompt AI
 proctx prompt
 ```
 
-Menghasilkan prompt siap pakai untuk AI coding assistant (OpenCode, Claude Code, Cursor, dll.).
+### Apa yang Dilakukan Setiap Perintah
 
-Prompt otomatis mendeteksi framework dan menyertakan:
-- Aturan manajemen konteks universal
-- Konvensi spesifik framework (Laravel, Vue, Next.js, Flutter, SOLID)
-- Pattern arsitektur dari proyek Anda
+#### `proctx init`
+- Membuat folder `.ai/` dengan file konteks
+- Membuat `.proctx/detectors/` dengan konfigurasi detector
+- Setup `.gitignore` (exclude `.ai/` dan `.proctx/`)
 
-Tinggal copy output dan paste ke AI assistant Anda.
+**Output:**
+```
+.ai/
+├── project-state.json    # File konteks utama
+├── architecture.json     # Pola arsitektur
+├── decisions.json        # Keputusan proyek
+├── progress.json         # Progress pekerjaan
+├── next-task.json        # Info task selanjutnya
+└── handoff.json          # Ringkasan handoff
 
----
+.proctx/
+└── detectors/
+    ├── framework-detector.json
+    ├── architecture-detector.json
+    └── knowledge-extractor.json
+```
 
-## Contoh OpenCode
+#### `proctx scan`
+- Deteksi framework (Node, Vue, React, Laravel, dll.)
+- Identifikasi pola arsitektur
+- Ekstrak modules, routes, stores, services, commands
+- Scan masalah keamanan (hardcoded secrets)
+- Update `.ai/project-state.json` dan file terkait
 
-Prompt:
+**Contoh output:**
+```
+🔍 Scanning project...
+🔒 Skipped 3 sensitive files
+✅ Scan completed
+📦 Framework: node
+🏗️  Architecture: cli-tool
+⚡ Commands: 3
+📂 Modules: 0
+📦 Dependencies: 12
 
-Baca seluruh file di dalam folder .ai/
+💾 Updated: .ai/project-state.json, handoff.json, architecture.json
+```
 
-Gunakan sebagai sumber kebenaran utama proyek.
+#### `proctx prompt`
+- Generate prompt siap pakai untuk AI berdasarkan proyek Anda
+- Bekerja dengan **semua agen AI** (Claude, GPT, Cursor, Windsurf, dll.)
+- Termasuk instruksi spesifik framework
+- Menghormati arsitektur dan konvensi yang ada
 
-Ikuti arsitektur dan keputusan yang sudah tersimpan.
+**Cara pakai:**
+1. Jalankan `proctx prompt`
+2. Copy output
+3. Paste ke AI assistant Anda
+4. AI sekarang memahami konteks proyek Anda!
 
----
+## Cara Kerja
 
-## Agent yang Didukung
+```
+Proyek Anda
+    ↓
+proctx scan
+    ↓
+Deteksi: Framework, Arsitektur, Modul, Keamanan
+    ↓
+Generate: .ai/*.json (konteks terstruktur)
+    ↓
+proctx prompt
+    ↓
+Agen AI baca file .ai/
+    ↓
+AI memahami proyek Anda!
+```
 
-- OpenCode
-- Claude Code
-- RooCode
-- Kiro
+## Framework yang Didukung
 
----
+ProCtx otomatis mendeteksi:
 
-## Filosofi
+**Frontend:**
+- Vue.js (2, 3)
+- React
+- Next.js
+- Nuxt
+- Svelte
 
-Project State
-≠
-Conversation History
+**Backend:**
+- Node.js
+- Laravel
+- Express
+- NestJS
 
-Riwayat percakapan bersifat sementara.
+**Mobile:**
+- Flutter
 
-Pengetahuan proyek harus tetap tersimpan.
+**Pola Arsitektur:**
+- MVC
+- SOLID
+- CLI-tool
+- Monorepo
+- Microservices
+- Clean Architecture
 
----
+## Fitur Keamanan
+
+ProCtx memiliki scanning keamanan built-in:
+
+### 🔒 Proteksi File Sensitif
+Otomatis skip:
+- File `.env`
+- `credentials.json`
+- Private keys (`.pem`, `.key`)
+- AWS credentials
+- Firebase service accounts
+
+### 🛡️ Deteksi Secret
+Scan untuk:
+- API keys (OpenAI, GitHub, AWS, dll.)
+- Password dan token
+- Hardcoded secrets
+- JWT tokens
+- Private keys
+
+**Contoh warning:**
+```
+🔒 Skipped 2 sensitive files
+⚠️  Security Warnings (1):
+   src/config.js:15 - Hardcoded secret in key: API_KEY
+```
+
+## Struktur Proyek
+
+```
+.ai/                        # File konteks AI (gitignored)
+├── project-state.json      # Konteks proyek utama
+├── architecture.json       # Pola arsitektur
+├── decisions.json          # Keputusan proyek
+├── progress.json           # Progress kerja
+├── next-task.json          # Task berikutnya
+└── handoff.json            # Ringkasan handoff
+
+.proctx/                    # Konfigurasi ProCtx (gitignored)
+└── detectors/
+    ├── framework-detector.json
+    ├── architecture-detector.json
+    └── knowledge-extractor.json
+```
+
+## Contoh: project-state.json
+
+```json
+{
+  "project": {
+    "name": "ProCtx",
+    "description": "AI Project Context Manager"
+  },
+  "framework": "node",
+  "stack": ["node"],
+  "architecture": "cli-tool",
+  "commands": ["init", "scan", "prompt"],
+  "modules": [],
+  "routes": [],
+  "stores": [],
+  "services": [],
+  "dependencies": 12,
+  "features": [],
+  "last_scan": "2026-06-20T04:15:00.000Z"
+}
+```
+
+## Workflow
+
+### Setup Pertama Kali
+```bash
+cd proyek-anda
+proctx init
+proctx scan
+```
+
+### Sebelum Sesi AI
+```bash
+proctx scan          # Update konteks
+proctx prompt        # Dapatkan prompt untuk AI
+# Paste prompt ke AI assistant
+```
+
+### Setelah Sesi AI
+```bash
+# AI update .ai/progress.json
+# AI update .ai/decisions.json
+# AI update .ai/next-task.json
+```
+
+### Handoff ke Agen Lain
+```bash
+proctx scan          # Refresh konteks
+proctx prompt        # Generate prompt baru
+# Agen baru baca .ai/handoff.json
+```
+
+## Konfigurasi
+
+Konfigurasi detector disimpan di `.proctx/detectors/`:
+
+- **framework-detector.json** - Aturan deteksi framework
+- **architecture-detector.json** - Aturan pola arsitektur
+- **knowledge-extractor.json** - Apa yang diekstrak (modules, routes, dll.)
+
+Anda bisa customize sesuai kebutuhan proyek.
+
+## Agent-Agnostic
+
+ProCtx bekerja dengan **semua agen AI coding:**
+
+- ✅ Claude (Anthropic)
+- ✅ ChatGPT (OpenAI)
+- ✅ Cursor
+- ✅ Windsurf
+- ✅ GitHub Copilot
+- ✅ Codeium
+- ✅ Agen apapun yang bisa baca file proyek
+
+**Kenapa agent-agnostic?**
+- ProCtx generate file JSON standar
+- Tidak ada format proprietary
+- Tidak ada vendor lock-in
+- Bekerja offline
+- Version control friendly
+
+## Referensi CLI
+
+```bash
+proctx init       # Inisialisasi proyek
+proctx scan       # Scan dan analisis
+proctx prompt     # Generate prompt AI
+proctx --help     # Tampilkan bantuan
+```
+
+## FAQ
+
+**T: Apakah file .ai/ harus di-commit ke git?**  
+J: Tidak, sudah otomatis gitignored. Setiap developer jalankan `proctx scan` lokal.
+
+**T: Bisakah pakai ProCtx dengan berbagai agen AI?**  
+J: Ya! File `.ai/` yang sama bekerja dengan semua agen.
+
+**T: Apakah ProCtx kirim data ke server eksternal?**  
+J: Tidak, semua berjalan lokal. Kode Anda tidak keluar dari mesin.
+
+**T: Bisa customize aturan deteksi?**  
+J: Ya, edit file di `.proctx/detectors/` sesuai kebutuhan.
+
+**T: Bagaimana jika framework saya tidak terdeteksi?**  
+J: Tambahkan ke `.proctx/detectors/framework-detector.json` dan submit PR!
+
+## Kontribusi
+
+Kontribusi sangat diterima!
+
+1. Fork repo
+2. Buat feature branch
+3. Test dengan `npm test`
+4. Submit PR
 
 ## Lisensi
 
-MIT
+MIT © afrix18
+
+## Link
+
+- **GitHub:** https://github.com/afrix18/proctx
+- **npm:** https://www.npmjs.com/package/proctx
+- **Issues:** https://github.com/afrix18/proctx/issues
+
+---
+
+**Dibuat dengan ❤️ untuk komunitas AI coding**

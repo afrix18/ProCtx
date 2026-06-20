@@ -1,50 +1,78 @@
 import fs from "fs"
 import path from "path"
+import { createHeader, createPromptBox, createWarningBox, printInfo, printWarning, printSeparator, printNewLine, PASTEL } from "../utils/ui.js"
 
 export function prompt() {
+  console.log("")
+  console.log(createHeader())
+  printSeparator()
+  printNewLine()
+  
   const root = process.cwd()
   const aiDir = path.join(root, ".ai")
 
   if (!fs.existsSync(aiDir)) {
-    console.log("⚠️  .ai/ folder not found. Run 'proctx init' first.")
+    console.log(createWarningBox("Not Initialized", [
+      "ProCtx context not found",
+      "",
+      "Run 'proctx init' first"
+    ], { width: 50 }))
+    printNewLine()
     return
   }
+
+  printInfo("Reading project context...")
+  printNewLine()
 
   let projectState = {}
   const projectStatePath = path.join(aiDir, "project-state.json")
   
   if (fs.existsSync(projectStatePath)) {
     projectState = JSON.parse(fs.readFileSync(projectStatePath, "utf-8"))
+  } else {
+    printWarning("No project-state.json found")
+    printInfo("Run 'proctx scan' first")
+    printNewLine()
+    return
   }
 
   const detectedFramework = detectFrameworkType(projectState)
   const promptText = generatePrompt(detectedFramework, projectState)
 
-  console.log(promptText)
+  const promptLines = promptText.split("\n")
+  console.log(createPromptBox(promptLines, { width: 60 }))
+  printNewLine()
+  printInfo("Copy the above prompt and paste into your AI assistant")
+  printNewLine()
 }
 
 function detectFrameworkType(projectState) {
-  const stack = projectState.stack || {}
-  const architecture = projectState.architecture || {}
+  const stack = projectState.stack || []
+  const framework = projectState.framework || ""
+  const architecture = projectState.architecture || ""
 
-  if (stack.backend === "laravel" || stack.backend === "php") {
+  if (stack.includes("laravel") || framework === "laravel") {
     return "laravel"
   }
 
-  if (stack.frontend === "vue" || stack.frontend === "nuxt") {
+  if (stack.includes("vue") || framework === "vue") {
     return "vue"
   }
 
-  if (stack.frontend === "next.js" || stack.frontend === "react") {
+  if (stack.includes("nextjs") || stack.includes("react") || framework === "nextjs") {
     return "nextjs"
   }
 
-  if (stack.frontend === "flutter" || stack.backend === "flutter") {
+  if (framework === "flutter") {
     return "flutter"
   }
 
-  if (architecture.pattern === "solid" || architecture.pattern === "repository") {
+  if (architecture === "solid") {
     return "solid"
+  }
+
+  if (architecture === "cli-tool") {
+    return "cli-tool"
   }
 
   return "general"
