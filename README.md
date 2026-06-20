@@ -108,6 +108,21 @@ proctx handoff
 proctx resume
 ```
 
+### Generate AI Prompt
+
+```bash
+proctx prompt
+```
+
+Generates a ready-to-use prompt for AI coding assistants (OpenCode, Claude Code, Cursor, etc.).
+
+The prompt automatically detects your framework and includes:
+- Universal context management rules
+- Framework-specific conventions (Laravel, Vue, Next.js, Flutter, SOLID)
+- Architecture patterns from your project
+
+Simply copy the output and paste it into your AI assistant.
+
 ---
 
 ## OpenCode Example

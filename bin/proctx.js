@@ -6,6 +6,7 @@ import { detect } from "../src/commands/detect.js"
 import { compress } from "../src/commands/compress.js"
 import { handoff } from "../src/commands/handoff.js"
 import { resume } from "../src/commands/resume.js"
+import { prompt } from "../src/commands/prompt.js"
 
 const command = process.argv[2]
 
@@ -34,6 +35,10 @@ switch (command) {
     resume()
     break
 
+  case "prompt":
+    prompt()
+    break
+
   default:
     console.log(`
 ProCtx - Project Context Management CLI
@@ -45,5 +50,6 @@ Commands:
   proctx compress   - Compress context into handoff format
   proctx handoff    - Generate handoff documentation
   proctx resume     - Resume from handoff context
+  proctx prompt     - Generate AI agent prompt (copy-paste ready)
 `)
 }
