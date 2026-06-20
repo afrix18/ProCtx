@@ -139,12 +139,6 @@ Ikuti arsitektur dan keputusan yang sudah tersimpan.
 - RooCode
 - Kiro
 
-Rencana:
-
-- VS Code Extension
-- Cursor
-- Windsurf
-
 ---
 
 ## Filosofi

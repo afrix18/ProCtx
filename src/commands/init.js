@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import { ensureGitignore } from "../utils/gitignore-manager.js"
 
 export function init() {
   const aiDir = path.join(process.cwd(), ".ai")
@@ -52,5 +53,12 @@ export function init() {
     fs.writeFileSync(filePath, JSON.stringify(content, null, 2))
   }
 
+  const gitignoreResult = ensureGitignore(process.cwd())
+  
+  if (gitignoreResult.updated) {
+    console.log("✅ Updated .gitignore with:", gitignoreResult.added.join(", "))
+  }
+
   console.log("✅ Initialized .ai/ folder with templates")
+  console.log("🔒 .ai/ and .opencode/ are now in .gitignore")
 }

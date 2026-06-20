@@ -144,12 +144,6 @@ Follow architecture decisions and current project state.
 - RooCode
 - Kiro
 
-Planned:
-
-- VS Code Extension
-- Cursor
-- Windsurf
-
 ---
 
 ## Philosophy
