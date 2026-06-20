@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/proctx)](https://www.npmjs.com/package/proctx)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+[🇬🇧 English](./README.md)
+
 **Kelola konteks proyek AI untuk semua agen AI coding.**
 
 ProCtx secara otomatis memindai proyek Anda, mendeteksi framework dan pola arsitektur, dan menghasilkan file konteks terstruktur yang membantu asisten AI memahami codebase Anda.
@@ -53,7 +55,8 @@ proctx prompt
 #### `proctx init`
 - Membuat folder `.ai/` dengan file konteks
 - Membuat `.proctx/detectors/` dengan konfigurasi detector
-- Setup `.gitignore` (exclude `.ai/` dan `.proctx/`)
+- Membuat `.opencode/skills/proctx/` dengan skill opencode
+- Setup `.gitignore` (exclude `.ai/`, `.proctx/`, ignore `.opencode/` tapi track skills)
 
 **Output:**
 ```
@@ -70,6 +73,11 @@ proctx prompt
     ├── framework-detector.json
     ├── architecture-detector.json
     └── knowledge-extractor.json
+
+.opencode/
+└── skills/
+    └── proctx/
+        └── SKILL.md       # Definisi skill OpenCode
 ```
 
 #### `proctx scan`
@@ -194,6 +202,11 @@ Scan untuk:
     ├── framework-detector.json
     ├── architecture-detector.json
     └── knowledge-extractor.json
+
+.opencode/                  # Integrasi OpenCode (skills di-track)
+└── skills/
+    └── proctx/
+        └── SKILL.md        # Skill native OpenCode
 ```
 
 ## Contoh: project-state.json
@@ -258,10 +271,11 @@ Konfigurasi detector disimpan di `.proctx/detectors/`:
 
 Anda bisa customize sesuai kebutuhan proyek.
 
-## Agent-Agnostic
+## Agen yang Didukung
 
-ProCtx bekerja dengan **semua agen AI coding:**
+ProCtx bekerja dengan:
 
+- ✅ **OpenCode** — integrasi skill native (`.opencode/skills/proctx/`)
 - ✅ Claude (Anthropic)
 - ✅ ChatGPT (OpenAI)
 - ✅ Cursor
@@ -292,7 +306,7 @@ proctx --help     # Tampilkan bantuan
 J: Tidak, sudah otomatis gitignored. Setiap developer jalankan `proctx scan` lokal.
 
 **T: Bisakah pakai ProCtx dengan berbagai agen AI?**  
-J: Ya! File `.ai/` yang sama bekerja dengan semua agen.
+J: Ya! File `.ai/` yang sama bekerja dengan semua agen. ProCtx juga punya skill native untuk **OpenCode**.
 
 **T: Apakah ProCtx kirim data ke server eksternal?**  
 J: Tidak, semua berjalan lokal. Kode Anda tidak keluar dari mesin.

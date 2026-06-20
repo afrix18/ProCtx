@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/proctx)](https://www.npmjs.com/package/proctx)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+[🇮🇩 Indonesian](./README.id.md)
+
 **Manage AI project context across any AI coding agent.**
 
 ProCtx automatically scans your project, detects frameworks and architecture patterns, and generates structured context files that help AI assistants understand your codebase.
@@ -53,7 +55,8 @@ proctx prompt
 #### `proctx init`
 - Creates `.ai/` folder with context files
 - Creates `.proctx/detectors/` with detector configs
-- Sets up `.gitignore` (excludes `.ai/` and `.proctx/`)
+- Creates `.opencode/skills/proctx/` with opencode skill
+- Sets up `.gitignore` (excludes `.ai/`, `.proctx/`, ignores `.opencode/` but tracks skills)
 
 **Output:**
 ```
@@ -70,6 +73,11 @@ proctx prompt
     ├── framework-detector.json
     ├── architecture-detector.json
     └── knowledge-extractor.json
+
+.opencode/
+└── skills/
+    └── proctx/
+        └── SKILL.md       # OpenCode skill definition
 ```
 
 #### `proctx scan`
@@ -194,6 +202,11 @@ Scans for:
     ├── framework-detector.json
     ├── architecture-detector.json
     └── knowledge-extractor.json
+
+.opencode/                  # OpenCode integration (skills tracked)
+└── skills/
+    └── proctx/
+        └── SKILL.md        # Native OpenCode skill
 ```
 
 ## Example: project-state.json
@@ -258,10 +271,11 @@ Detector configs are stored in `.proctx/detectors/`:
 
 You can customize these to match your project needs.
 
-## Agent-Agnostic
+## Supported Agents
 
-ProCtx works with **any AI coding agent:**
+ProCtx works with:
 
+- ✅ **OpenCode** — native skill integration (`.opencode/skills/proctx/`)
 - ✅ Claude (Anthropic)
 - ✅ ChatGPT (OpenAI)
 - ✅ Cursor
@@ -292,7 +306,7 @@ proctx --help     # Show help
 A: No, they're automatically gitignored. Each developer runs `proctx scan` locally.
 
 **Q: Can I use ProCtx with multiple AI agents?**  
-A: Yes! The same `.ai/` files work with any agent.
+A: Yes! The same `.ai/` files work with any agent. ProCtx also includes a native skill for **OpenCode**.
 
 **Q: Does ProCtx send data to external servers?**  
 A: No, everything runs locally. Your code never leaves your machine.

@@ -6,7 +6,9 @@ export function ensureGitignore(rootPath) {
   
   const requiredEntries = [
     ".ai/",
-    ".proctx/"
+    ".proctx/",
+    ".opencode/",
+    "!.opencode/skills/"
   ]
 
   let gitignoreContent = ""
