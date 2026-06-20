@@ -1,80 +1,74 @@
+🌍 Languages
+
+- English (default)
+- [Bahasa Indonesia](README.id.md)
+
 # ProCtx
 
-**AI Project Context Manager**
+> AI Project Context Manager
 
 Scan → Compress → Handoff → Resume
 
-ProCtx Engine is a framework-agnostic context management layer for AI coding agents.
+ProCtx is a framework-agnostic context management system for AI coding agents.
 
-The goal is to preserve project knowledge while minimizing context usage.
-
-Instead of carrying hundreds of thousands of conversation tokens, the system extracts and stores project state into structured memory files.
-
-## Installation
-
-```bash
-npm install -g github:avarenza/proctx
-```
-
-## Usage
-
-```bash
-proctx init       # Initialize .ai/ folder
-proctx bootstrap  # Analyze project and create context
-proctx detect     # Run framework/architecture detection
-proctx compress   # Compress context
-proctx handoff    # Generate handoff documentation
-proctx resume     # Resume from handoff
-```
+The goal is to preserve project knowledge while reducing context usage and preventing context overflow.
 
 ---
 
-Supported agents:
+## Why ProCtx?
 
-* OpenCode
-* Claude Code
-* RooCode
-* Kiro
+Most AI coding agents rely entirely on conversation history.
 
-Future:
+As projects grow:
 
-* VS Code Extension
-* CLI Integration
-* Auto Compression
-
----
-
-## Problem
-
-Most coding agents store project state inside conversation history.
-
-Over time:
-
-Conversation History
-→ 50k tokens
+50k tokens
 → 100k tokens
 → 200k tokens
-→ Provider Limits
+→ Context Overflow
 
-Result:
+This causes:
 
-* Context overflow
-* Higher costs
-* Slower responses
-* Hallucinations
+- Lost project knowledge
+- Repeated explanations
+- Higher costs
+- Slower responses
+- Hallucinations
 
----
-
-## Solution
-
-ProCtx Engine separates:
+ProCtx separates:
 
 Project State
 ≠
 Conversation History
 
-Project knowledge is extracted into memory files:
+---
 
+## Installation
+
+### GitHub
+
+```bash
+npm install -g github:avarenza/proctx
+```
+
+Verify:
+
+```bash
+proctx --help
+```
+
+---
+
+## Quick Start
+
+### Initialize
+
+```bash
+proctx init
+```
+
+Creates:
+
+```txt
 .ai/
 ├── project-state.json
 ├── architecture.json
@@ -82,37 +76,79 @@ Project knowledge is extracted into memory files:
 ├── progress.json
 ├── next-task.json
 └── handoff.json
+```
+
+### Analyze Project
+
+```bash
+proctx bootstrap
+```
+
+### Detect Architecture
+
+```bash
+proctx detect
+```
+
+### Compress Context
+
+```bash
+proctx compress
+```
+
+### Generate Handoff
+
+```bash
+proctx handoff
+```
+
+### Resume Session
+
+```bash
+proctx resume
+```
 
 ---
 
-## Core Components
+## OpenCode Example
 
-### Framework Detector
+Prompt:
 
-Detect backend, frontend, mobile frameworks.
+Read all files inside .ai/
 
-### Architecture Detector
+Use them as source of truth.
 
-Detect project architecture patterns.
-
-### Knowledge Extractor
-
-Extract project knowledge.
-
-### Compression Engine
-
-Compress context while preserving knowledge.
-
-### Bootstrap Engine
-
-Restore project state in a new session.
+Follow architecture decisions and current project state.
 
 ---
 
-## Goals
+## Supported Agents
 
-* Reduce context usage
-* Preserve project knowledge
-* Improve consistency
-* Reduce hallucinations
-* Enable long-running projects
+- OpenCode
+- Claude Code
+- RooCode
+- Kiro
+
+Planned:
+
+- VS Code Extension
+- Cursor
+- Windsurf
+
+---
+
+## Philosophy
+
+Project State
+≠
+Conversation History
+
+Conversation history is temporary.
+
+Project knowledge should persist.
+
+---
+
+## License
+
+MIT
