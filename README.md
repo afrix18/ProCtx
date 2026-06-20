@@ -1,10 +1,33 @@
-# Project Memory System
+# ProCtx
 
-Project Memory System is a framework-agnostic memory layer for AI coding agents.
+**AI Project Context Manager**
+
+Scan → Compress → Handoff → Resume
+
+ProCtx Engine is a framework-agnostic context management layer for AI coding agents.
 
 The goal is to preserve project knowledge while minimizing context usage.
 
 Instead of carrying hundreds of thousands of conversation tokens, the system extracts and stores project state into structured memory files.
+
+## Installation
+
+```bash
+npm install -g github:avarenza/proctx
+```
+
+## Usage
+
+```bash
+proctx init       # Initialize .ai/ folder
+proctx bootstrap  # Analyze project and create context
+proctx detect     # Run framework/architecture detection
+proctx compress   # Compress context
+proctx handoff    # Generate handoff documentation
+proctx resume     # Resume from handoff
+```
+
+---
 
 Supported agents:
 
@@ -44,7 +67,7 @@ Result:
 
 ## Solution
 
-Project Memory System separates:
+ProCtx Engine separates:
 
 Project State
 ≠
@@ -53,13 +76,12 @@ Conversation History
 Project knowledge is extracted into memory files:
 
 .ai/
-├── project.yaml
-├── architecture.md
-├── business-rules.md
-├── decisions.md
-├── progress.md
-├── next-task.md
-└── handoff.md
+├── project-state.json
+├── architecture.json
+├── decisions.json
+├── progress.json
+├── next-task.json
+└── handoff.json
 
 ---
 

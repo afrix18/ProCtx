@@ -1,0 +1,25 @@
+{
+  "project": {
+    "name": "UNKNOWN",
+    "type": "web-app"
+  },
+
+  "stack": {
+    "backend": "unknown",
+    "frontend": "unknown",
+    "runtime": "unknown"
+  },
+
+  "architecture": {
+    "pattern": "unknown"
+  },
+
+  "features": [],
+
+  "current_focus": "unknown",
+
+  "progress": {
+    "percent": 0,
+    "status": "unknown"
+  }
+}

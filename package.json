@@ -1,0 +1,23 @@
+{
+  "name": "proctx",
+  "version": "0.1.0",
+  "description": "Project Context Management CLI",
+  "type": "module",
+  "bin": {
+    "proctx": "bin/proctx.js"
+  },
+  "scripts": {
+    "dev": "node bin/proctx.js"
+  },
+  "keywords": [
+    "ai",
+    "context",
+    "project-context",
+    "compression",
+    "handoff",
+    "agent",
+    "cli"
+  ],
+  "author": "Natincy",
+  "license": "MIT"
+}

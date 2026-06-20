@@ -1,0 +1,18 @@
+{
+  "steps": [
+    "scan_filesystem",
+    "apply_framework_detector",
+    "apply_architecture_detector",
+    "build_project_state",
+    "write_ai_folder"
+  ],
+
+  "output": {
+    "project_state": ".ai/project-state.json",
+    "architecture": ".ai/architecture.json",
+    "decisions": ".ai/decisions.json",
+    "progress": ".ai/progress.json",
+    "next_task": ".ai/next-task.json",
+    "handoff": ".ai/handoff.json"
+  }
+}

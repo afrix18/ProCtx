@@ -1,0 +1,37 @@
+{
+  "rules": [
+    {
+      "id": "feature-based",
+      "when": {
+        "folders": ["features", "modules"]
+      },
+      "output": {
+        "pattern": "feature-based"
+      }
+    },
+
+    {
+      "id": "solid-laravel",
+      "when": {
+        "folders": ["app/Services", "app/Repositories", "app/Interfaces"]
+      },
+      "output": {
+        "pattern": "solid"
+      }
+    },
+
+    {
+      "id": "mvc-default",
+      "when": {
+        "files": ["app/Http/Controllers"]
+      },
+      "output": {
+        "pattern": "mvc"
+      }
+    }
+  ],
+
+  "default": {
+    "pattern": "unknown"
+  }
+}

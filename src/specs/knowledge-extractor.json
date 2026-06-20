@@ -1,0 +1,21 @@
+{
+  "rules": [
+    {
+      "id": "api-services",
+      "match": "services",
+      "extract": "api structure"
+    },
+
+    {
+      "id": "state-management",
+      "match": "pinia|vuex",
+      "extract": "state architecture"
+    },
+
+    {
+      "id": "auth-system",
+      "match": "auth|jwt|token",
+      "extract": "authentication flow"
+    }
+  ]
+}

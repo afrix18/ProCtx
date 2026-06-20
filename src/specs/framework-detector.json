@@ -1,0 +1,53 @@
+{
+  "name": "framework-detector",
+  "version": "2.0",
+
+  "rules": [
+    {
+      "id": "laravel",
+      "when": {
+        "files": ["composer.json", "artisan"]
+      },
+      "output": {
+        "backend": "laravel",
+        "runtime": "php"
+      }
+    },
+
+    {
+      "id": "vue",
+      "when": {
+        "files": ["package.json", "vite.config.ts"]
+      },
+      "output": {
+        "frontend": "vue"
+      }
+    },
+
+    {
+      "id": "nextjs",
+      "when": {
+        "files": ["next.config.js"]
+      },
+      "output": {
+        "frontend": "nextjs"
+      }
+    },
+
+    {
+      "id": "nestjs",
+      "when": {
+        "files": ["nest-cli.json"]
+      },
+      "output": {
+        "backend": "nestjs",
+        "runtime": "node"
+      }
+    }
+  ],
+
+  "default": {
+    "backend": "unknown",
+    "frontend": "unknown"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "thresholds": {
+    "warn_tokens": 60000,
+    "compress_tokens": 120000
+  },
+
+  "keep": [
+    "architecture",
+    "decisions",
+    "progress",
+    "next-task"
+  ],
+
+  "drop": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "logs",
+    ".gitignored_files"
+  ],
+
+  "strategy": {
+    "method": "summarize + merge + flatten",
+    "output": ".ai/handoff.json"
+  }
+}
